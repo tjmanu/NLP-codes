@@ -1,3 +1,5 @@
+# Function to read excel, preprocess and combine 3 columns into single column
+
 def fetchdata(file,i):
     data = []
     for i in i:
@@ -14,15 +16,19 @@ def fetchdata(file,i):
     #print(appended_data)
     return appended_data
 
+# Import libraries
 import pandas as pd
 import numpy as np
 
+# Excel Sheet No.
 i1 = [1,2,5,7,9]
 i2 = [0,2,4,6,8,10]
 i3 = [0,1,2]
 i4 = [0,1,2]
 i5 = [0,1,2,3]
 i6 = [0]
+
+# Excel file names
 file1 = "x file.xlsx"
 file2 = "y file.xlsx"
 file3 = "z file.xlsx"
