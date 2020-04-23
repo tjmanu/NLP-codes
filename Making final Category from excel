@@ -1,0 +1,40 @@
+def fetchdata(file,i):
+    data = []
+    for i in i:
+        sheet1 = pd.read_excel(file, sheet_name=i)
+        sheet1 = sheet1.rename(columns = {"Category": "cat_qc1","Category.1":"cat_qc2","category": "cat_org", "QC Category":"cat_qc2"})
+        sheet1.columns = map(str.lower, sheet1.columns)
+        df = sheet1[['best_representation','normalized_payee_name','cat_score','cat_org','cat_qc1','cat_qc2']]
+        df['cat_f1'] = df['cat_qc1'].fillna(df['cat_org'])
+        df['new_category'] = df['cat_qc2'].fillna(df['cat_f1'])
+        df = df.drop(['cat_f1'], axis=1)
+        #df.head(10)
+        data.append(df)
+    appended_data = pd.concat(data)
+    #print(appended_data)
+    return appended_data
+
+import pandas as pd
+import numpy as np
+
+i1 = [1,2,5,7,9]
+i2 = [0,2,4,6,8,10]
+i3 = [0,1,2]
+i4 = [0,1,2]
+i5 = [0,1,2,3]
+i6 = [0]
+file1 = "x file.xlsx"
+file2 = "y file.xlsx"
+file3 = "z file.xlsx"
+file4 = "a file.xlsx"
+file5 = "b file.xlsx"
+file6 = "c file.xlsx"
+
+file1_data = fetchdata(file1,i1)
+file2_data = fetchdata(file2,i2)
+file3_data = fetchdata(file3,i3)
+file4_data = fetchdata(file4,i4)
+file5_data = fetchdata(file5,i5)
+file6_data = fetchdata(file6,i6)
+data = pd.concat([file1_data,file2_data,file3_data,file4_data,file5_data,file6_data])
+data
